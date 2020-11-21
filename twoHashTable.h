@@ -1,12 +1,12 @@
 #include "position.h"
 #include "UPCEntry.h"
 #include <cmath>
-using namespace std;
+#include <string>
 
 class TwoHashTable
 {
 public:
-    TwoHashTable(string filename, int tableSize);
+    TwoHashTable(std::string filename, int tableSize) {}
     bool insert(UPCEntry &item);     // returns true if successful, false otherwise.
     Position search(UPCEntry &item); // if not found, return the default position with both indices set as -1
     float getStdDev();

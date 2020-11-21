@@ -1,23 +1,45 @@
 #ifndef UPC_ENTRY
 #define UPC_ENTRY
 #include <string>
-using namespace std;
+#include <utility>
+#include <tuple>
+#include <ostream>
 
-struct UPCEntry
+class UPCEntry
 {
-    long long upc = -1;
-    string desc = "";
+public:
+    unsigned long long upc;
+    std::string name;
 
-    UPCEntry(string);
+	UPCEntry()
+		: upc(0)
+		  , name("") {}
 
-    int hash1(int tableSize)
-    {
-        return upc % tableSize;
-    }
+    UPCEntry(unsigned long long upc, std::string name)
+    	: upc(upc)
+    	, name(std::move(name)) {}
 
-    int hash2(int tableSize)
-    {
-        return abs(desc[0] + 27 * desc[1] + 729 * desc[2]) % tableSize;
-    }
+	UPCEntry(const std::string& row);
+
+	static UPCEntry parse(std::istream& file);
+
+//    int hash1(int tableSize)
+//    {
+//        return upc % tableSize;
+//    }
+//
+//    int hash2(int tableSize)
+//    {
+//        return std::abs(desc[0] + 27 * desc[1] + 729 * desc[2]) % tableSize;
+//    }
+
+	bool operator==(const UPCEntry& rhs) const {
+		return std::tie(upc, name) == std::tie(rhs.upc, rhs.name);
+	}
+
+	friend std::ostream& operator<<(std::ostream& os, const UPCEntry& entry) {
+		os << "{ upc: " << entry.upc << ", name: " << entry.name << " }";
+		return os;
+	}
 };
 #endif
