@@ -1,10 +1,15 @@
-#include <iostream>
-
 #include "twoHashTable.h"
 #include "UPCEntry.h"
-#include <assert.h>
+#include <iostream>
+#include <cassert>
 using namespace std;
 
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "modernize-raw-string-literal"
+#pragma ide diagnostic ignored "modernize-use-auto"
+#pragma ide diagnostic ignored "modernize-loop-convert"
+#pragma clang diagnostic ignored "-Wshadow"
+#pragma clang diagnostic ignored "-Wvla-extension"
 //don't change anything in the main function.
 int main()
 {
@@ -41,3 +46,4 @@ int main()
     }
     return 0;
 }
+#pragma clang diagnostic pop
