@@ -19,6 +19,21 @@ TEST(TwoHashTable, insert) {
 			{1, "aaa"},
 			TwoHashTable({{0, "aaa"}, {1, "aaa"}}),
 		},
+		{
+			TwoHashTable({{0, "aaa"}}, 1),
+			{0, "aaa"},
+			TwoHashTable({{0, "aaa"}, {0, "aaa"}}),
+		},
+		{
+			TwoHashTable({}, 2),
+			{0, "aaa"},
+			TwoHashTable({{0, "aaa"}}),
+		},
+		{
+			TwoHashTable({{0, "aaa"}}, 2),
+			{1, "aaa"},
+			TwoHashTable({{0, "aaa"}, {1, "aaa"}}),
+		},
 	};
 
 	for (size_t i = 0; i < tests.size(); ++i) {
@@ -27,6 +42,46 @@ TEST(TwoHashTable, insert) {
 	}
 
 	EXPECT_EQ(TwoHashTable().insert({0, ""}), false);
+}
+
+TEST(TwoHashTable, search) {
+	struct Test {
+		TwoHashTable table;
+		UPCEntry item;
+		Position expected;
+	};
+
+	std::vector<Test> tests {
+		{
+			TwoHashTable({}),
+			{0, ""},
+			Position::notFound(),
+		},
+		{
+			TwoHashTable({}),
+			{0, "aaa"},
+			Position::notFound(),
+		},
+		{
+			TwoHashTable({{0, "aaa"}}),
+			{0, "aaa"},
+			{0, 0},
+		},
+		{
+			TwoHashTable({{1, "aaa"}}, 2),
+			{1, "aaa"},
+			{1, 0},
+		},
+		{
+			TwoHashTable({{0, "aaa"}, {1, "aaa"}}, 1),
+			{1, "aaa"},
+			{0, 1},
+		},
+	};
+
+	for (size_t i = 0; i < tests.size(); ++i) {
+		EXPECT_EQ(tests[i].table.search(tests[i].item), tests[i].expected) << i;
+	}
 }
 
 TEST(TwoHashTable, getHash) {

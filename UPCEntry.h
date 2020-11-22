@@ -1,5 +1,6 @@
-#ifndef UPC_ENTRY
-#define UPC_ENTRY
+#ifndef ASSIGNMENT_6__UPCENTRY_H_
+#define ASSIGNMENT_6__UPCENTRY_H_
+
 #include <string>
 #include <utility>
 #include <tuple>
@@ -32,4 +33,5 @@ public:
 		return os;
 	}
 };
-#endif
+
+#endif //ASSIGNMENT_6__UPCENTRY_H_

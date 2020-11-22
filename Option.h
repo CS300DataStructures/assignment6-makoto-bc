@@ -1,5 +1,5 @@
-#ifndef ASSIGNMENT_5__OPTIONAL_H_
-#define ASSIGNMENT_5__OPTIONAL_H_
+#ifndef ASSIGNMENT_6__OPTIONAL_H_
+#define ASSIGNMENT_6__OPTIONAL_H_
 
 #include <stdexcept>
 #include <ostream>
@@ -52,4 +52,4 @@ private:
 	T _value;
 };
 
-#endif //ASSIGNMENT_5__OPTIONAL_H_
+#endif //ASSIGNMENT_6__OPTIONAL_H_

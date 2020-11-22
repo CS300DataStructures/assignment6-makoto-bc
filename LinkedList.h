@@ -1,5 +1,5 @@
-#ifndef LINKED_LIST__LINKEDLIST_H_
-#define LINKED_LIST__LINKEDLIST_H_
+#ifndef ASSIGNMENT_6__LINKEDLIST_H_
+#define ASSIGNMENT_6__LINKEDLIST_H_
 
 #include <memory>
 #include <ostream>
@@ -149,4 +149,4 @@ private:
 	size_t _size;
 };
 
-#endif //LINKED_LIST__LINKEDLIST_H_
+#endif //ASSIGNMENT_6__LINKEDLIST_H_

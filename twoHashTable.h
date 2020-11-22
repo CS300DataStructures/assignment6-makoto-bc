@@ -1,3 +1,6 @@
+#ifndef ASSIGNMENT_6__TWOHASHTABLE_H_
+#define ASSIGNMENT_6__TWOHASHTABLE_H_
+
 #include "position.h"
 #include "UPCEntry.h"
 #include "LinkedList.h"
@@ -48,7 +51,7 @@ public:
 
     std::vector<UPCEntry> entries() const;
 
-//    Position search(UPCEntry &item); // if not found, return the default position with both indices set as -1
+    Position search(UPCEntry &item); // if not found, return the default position with both indices set as -1
 
 //    float getStdDev();
 
@@ -81,3 +84,5 @@ public:
 };
 
 Option<Hash> getHash(const UPCEntry& entry, size_t tableSize);
+
+#endif //ASSIGNMENT_6__TWOHASHTABLE_H_

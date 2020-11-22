@@ -39,6 +39,22 @@ std::vector<UPCEntry> TwoHashTable::entries() const {
 	return result;
 }
 
+Position TwoHashTable::search(UPCEntry& item) {
+	auto hashResult = getHash(item, _size);
+	if (!hashResult.hasValue()) {
+		return Position::notFound();
+	}
+
+	for (size_t hash : std::array<size_t, 2>{hashResult.value().h1, hashResult.value().h2}) {
+		for (size_t i = 0; i < _buckets[hash].size(); ++i) {
+			if (_buckets[hash][i].upc == item.upc) {
+				return {static_cast<int>(hash), static_cast<int>(i)};
+			}
+		}
+	}
+	return Position::notFound();
+}
+
 std::ostream& operator<<(std::ostream& os, const TwoHashTable& table) {
 	os << "{ ";
 	auto entries = table.entries();
