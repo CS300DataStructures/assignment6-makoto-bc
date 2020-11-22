@@ -113,3 +113,43 @@ TEST(TwoHashTable, getHash) {
 		EXPECT_EQ(getHash(tests[i].entry, tests[i].tableSize), tests[i].expected) << i;
 	}
 }
+
+TEST(TwoHashTable, getStddev) {
+	struct Test {
+		TwoHashTable table;
+		double expected;
+	};
+
+	std::vector<Test> tests {
+		{
+			TwoHashTable({{0, "aaa"}}, 1),
+			0,
+		},
+		{
+			TwoHashTable({{0, "aaa"}, {1, "aaa"}}, 1),
+			0,
+		},
+		{
+			TwoHashTable({
+				{0, "aaa"},
+				{1, "aaa"},
+				{2, "aaa"},
+			}, 2),
+			0.5,
+		},
+		{
+			TwoHashTable({
+				{0, "aaa"},
+				{0, "aaa"},
+				{1, "aaa"},
+			}, 3),
+			0.81649658092772603,
+		},
+	};
+
+	for (size_t i = 0; i < tests.size(); ++i) {
+		EXPECT_EQ(tests[i].table.getStdDev(), tests[i].expected) << i;
+	}
+
+	EXPECT_TRUE(std::isnan(TwoHashTable().getStdDev()));
+}

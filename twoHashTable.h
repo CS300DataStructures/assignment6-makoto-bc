@@ -53,7 +53,7 @@ public:
 
     Position search(UPCEntry &item); // if not found, return the default position with both indices set as -1
 
-//    float getStdDev();
+    double getStdDev();
 
 	bool operator==(const TwoHashTable& rhs) const {
 		auto cmp = [](const UPCEntry& a, const UPCEntry& b) {

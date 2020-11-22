@@ -69,20 +69,17 @@ std::ostream& operator<<(std::ostream& os, const TwoHashTable& table) {
 	return os;
 }
 
-float stddev(int *binLengths, int tableSize)
-{
-	float sum = 0;
-	for (int i = 0; i < tableSize; i++)
-		sum += binLengths[i];
+double TwoHashTable::getStdDev() {
+	double sum = 0;
+	for (size_t i = 0; i < _size; ++i) {
+		sum += _buckets[i].size();
+	}
+	double average = sum / _size;
 
-	float avarage = sum / tableSize;
-
-	float dev_sum = 0;
-	for (int i = 0; i < tableSize; i++)
-	{
-		dev_sum = dev_sum + (binLengths[i] - avarage) * (binLengths[i] - avarage);
+	double deviationSum = 0;
+	for (size_t i = 0; i < _size; ++i) {
+		deviationSum += (_buckets[i].size() - average) * (_buckets[i].size() - average);
 	}
 
-	float variance = dev_sum / tableSize;
-	return sqrt(variance);
+	return std::sqrt(deviationSum / _size);
 }
