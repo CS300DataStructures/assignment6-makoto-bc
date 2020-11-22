@@ -6,7 +6,7 @@ add_compile_options(-Wall -Wextra -pedantic)
 
 set(
     SOURCES
-#    twoHashTable.cpp
+    twoHashTable.cpp
     UPCEntry.cpp
 )
 
