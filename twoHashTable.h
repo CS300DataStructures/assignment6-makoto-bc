@@ -13,6 +13,8 @@
 
 class TwoHashTable {
 public:
+	static TwoHashTable parse(std::istream& file, size_t size);
+
 	TwoHashTable()
 		: TwoHashTable(0)
 	{}
@@ -29,23 +31,21 @@ public:
 	}
 
 	TwoHashTable(TwoHashTable&& other) noexcept : TwoHashTable() {
-		_buckets = std::move(other._buckets);
-		_size = other._size;
+		*this = std::move(other);
 	}
 
-	TwoHashTable(const std::initializer_list<UPCEntry>& list) : TwoHashTable(list.size()) {
-		for (const auto& entry : list) {
-			insert(entry);
-		}
-	}
+	TwoHashTable(const std::initializer_list<UPCEntry>& list)
+		: TwoHashTable(list, list.size()) {}
 
 	TwoHashTable(const std::initializer_list<UPCEntry>& list, size_t size) : TwoHashTable(size) {
 		for (const auto& entry : list) {
-			insert(entry);
+			if (!insert(entry)) {
+				throw std::runtime_error("invalid entry");
+			}
 		}
 	}
 
-//    TwoHashTable(const std::string& filename, size_t size);
+    TwoHashTable(const std::string& filename, size_t size);
 
     bool insert(UPCEntry item);     // returns true if successful, false otherwise.
 
@@ -67,6 +67,12 @@ public:
 	}
 
 	friend std::ostream& operator<<(std::ostream& os, const TwoHashTable& table);
+
+	TwoHashTable& operator=(TwoHashTable&& rhs) noexcept {
+		_buckets = std::move(rhs._buckets);
+		_size = rhs._size;
+		return *this;
+	}
 
 private:
 	std::unique_ptr<List<UPCEntry>[]> _buckets;

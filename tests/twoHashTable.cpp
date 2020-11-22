@@ -1,6 +1,65 @@
 #include <gtest/gtest.h>
 #include "../twoHashTable.h"
 
+TEST(TwoHashTable, parse) {
+	struct Test {
+		std::string text;
+		bool expectThrow;
+		TwoHashTable expected;
+	};
+
+	std::vector<Test> tests {
+		{
+			"",
+			false,
+			TwoHashTable(),
+		},
+		{
+			"a",
+			true,
+			TwoHashTable(),
+		},
+		{
+			"0,",
+			true,
+			TwoHashTable(),
+		},
+		{
+			"0,a",
+			true,
+			TwoHashTable(),
+		},
+		{
+			"0,aaa",
+				false,
+				TwoHashTable({{0, "aaa"}}),
+		},
+		{
+			"0,aaa\n1,aaa\n",
+			false,
+			TwoHashTable({{0, "aaa"}, {1, "aaa"}}),
+		},
+		{
+			"035200264013,Riceland American Jazmine Rice\n"
+			"011111065925,Caress Velvet Bliss Ultra Silkening Beauty Bar - 6 Ct\n",
+			false,
+			TwoHashTable({
+				{35200264013, "Riceland American Jazmine Rice"},
+				{11111065925, "Caress Velvet Bliss Ultra Silkening Beauty Bar - 6 Ct"},
+			}),
+		},
+	};
+
+	for (size_t i = 0; i < tests.size(); ++i) {
+		std::stringstream ss(tests[i].text);
+		if (tests[i].expectThrow) {
+			EXPECT_THROW(TwoHashTable::parse(ss, 2), std::runtime_error) << i;
+		} else {
+			EXPECT_EQ(TwoHashTable::parse(ss, 2), tests[i].expected) << i;
+		}
+	}
+}
+
 TEST(TwoHashTable, insert) {
 	struct Test {
 		TwoHashTable table;

@@ -67,8 +67,7 @@ TEST(UPCEntry, parse) {
 		if (tests[i].expectThrow) {
 			EXPECT_THROW(UPCEntry::parse(ss), std::runtime_error) << i;
 		} else {
-			UPCEntry result;
-			EXPECT_NO_THROW(result = UPCEntry::parse(ss)) << i;
+			auto result = UPCEntry::parse(ss);
 			EXPECT_EQ(result, tests[i].expected) << i;
 		}
 	}

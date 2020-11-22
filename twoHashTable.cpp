@@ -1,5 +1,25 @@
 #include "twoHashTable.h"
 #include <algorithm>
+#include <fstream>
+
+TwoHashTable TwoHashTable::parse(std::istream& file, size_t size) {
+	TwoHashTable result(size);
+	while(true) {
+		file.peek();
+		if (file.eof()) {
+			return result;
+		}
+
+		if (!result.insert(UPCEntry::parse(file))) {
+			throw std::runtime_error("invalid entry");
+		}
+	}
+}
+
+TwoHashTable::TwoHashTable(const std::string& filename, size_t size) : TwoHashTable(size) {
+	std::ifstream file(filename);
+	*this = parse(file, size);
+}
 
 bool TwoHashTable::insert(UPCEntry item) {
 	auto hashResult = getHash(item, _size);
