@@ -18,6 +18,11 @@ TwoHashTable TwoHashTable::parse(std::istream& file, size_t size) {
 
 TwoHashTable::TwoHashTable(const std::string& filename, size_t size) : TwoHashTable(size) {
 	std::ifstream file(filename);
+	if (!file.good()) {
+		throw std::runtime_error("file does not exist");
+	}
+	std::string s;
+	std::getline(file, s); // Skip header
 	*this = parse(file, size);
 }
 
@@ -39,13 +44,13 @@ bool TwoHashTable::insert(UPCEntry item) {
 }
 
 Option<Hash> getHash(const UPCEntry& entry, size_t tableSize) {
-	if (entry.name.size() < 3 || tableSize == 0) {
+	if (entry.description.size() < 3 || tableSize == 0) {
 		return {};
 	}
 
 	return {{
 		entry.upc % tableSize,
-		(entry.name[0] + 27 * entry.name[1] + 729 * entry.name[2]) % tableSize,
+		(entry.description[0] + 27 * entry.description[1] + 729 * entry.description[2]) % tableSize,
 	}};
 }
 

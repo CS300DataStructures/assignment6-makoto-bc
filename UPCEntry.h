@@ -10,7 +10,7 @@ class UPCEntry
 {
 public:
     unsigned long long upc;
-    std::string name;
+    std::string description;
 
 	UPCEntry()
 		: upc(0)
@@ -18,18 +18,18 @@ public:
 
     UPCEntry(unsigned long long upc, std::string name)
     	: upc(upc)
-    	, name(std::move(name)) {}
+    	, description(std::move(name)) {}
 
 	explicit UPCEntry(const std::string& row);
 
 	static UPCEntry parse(std::istream& file);
 
 	bool operator==(const UPCEntry& rhs) const {
-		return std::tie(upc, name) == std::tie(rhs.upc, rhs.name);
+		return std::tie(upc, description) == std::tie(rhs.upc, rhs.description);
 	}
 
 	friend std::ostream& operator<<(std::ostream& os, const UPCEntry& entry) {
-		os << "{ upc: " << entry.upc << ", name: " << entry.name << " }";
+		os << "{ upc: " << entry.upc << ", name: " << entry.description << " }";
 		return os;
 	}
 };

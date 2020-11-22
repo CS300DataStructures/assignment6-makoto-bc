@@ -4,7 +4,7 @@
 TEST(UPCEntry, readStringConstructor) {
 	UPCEntry e("753950001954,Doctor's Best Best Curcumin C3 Complex 1000mg Tablets - 120 Ct");
 	EXPECT_EQ(e.upc, 753950001954);
-	EXPECT_EQ(e.name, "Doctor's Best Best Curcumin C3 Complex 1000mg Tablets - 120 Ct");
+	EXPECT_EQ(e.description, "Doctor's Best Best Curcumin C3 Complex 1000mg Tablets - 120 Ct");
 }
 
 TEST(UPCEntry, parse) {
