@@ -1,3 +1,8 @@
+// Assignment 6
+// Makoto Emura
+// 11/23/2020
+// Hash table for UPC and description
+
 #include "twoHashTable.h"
 #include "UPCEntry.h"
 #include <iostream>
@@ -5,6 +10,7 @@
 using namespace std;
 
 #pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunknown-pragmas"
 #pragma ide diagnostic ignored "modernize-raw-string-literal"
 #pragma ide diagnostic ignored "modernize-use-auto"
 #pragma ide diagnostic ignored "modernize-loop-convert"

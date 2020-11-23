@@ -6,6 +6,9 @@
 #include <tuple>
 #include <ostream>
 
+/**
+ * An entry in TwoHashTable which contains UPC and description.
+ */
 class UPCEntry
 {
 public:
@@ -20,8 +23,14 @@ public:
     	: upc(upc)
     	, description(std::move(name)) {}
 
+	/**
+	 * Parses row.
+	 */
 	explicit UPCEntry(const std::string& row);
 
+	/**
+	 * Reads one row from database file.
+	 */
 	static UPCEntry parse(std::istream& file);
 
 	bool operator==(const UPCEntry& rhs) const {

@@ -80,7 +80,7 @@ std::vector<UPCEntry> TwoHashTable::entries() const {
 	return result;
 }
 
-Position TwoHashTable::search(UPCEntry& item) {
+Position TwoHashTable::search(const UPCEntry& item) const {
 	auto hashResult = getHash(item, _size);
 	if (!hashResult.hasValue()) {
 		return Position::notFound();

@@ -13,12 +13,20 @@
 
 class TwoHashTable {
 public:
+	/**
+	 * Read entries in given CSV file and creates a table that represents the database.
+	 * @param size Number of buckets
+	 */
 	static TwoHashTable parse(std::istream& file, size_t size);
 
 	TwoHashTable()
 		: TwoHashTable(0)
 	{}
 
+	/**
+	 * Empty table.
+	 * @param size Number of buckets
+	 */
 	explicit TwoHashTable(size_t size)
 		: _buckets(std::make_unique<List<UPCEntry>[]>(size))
 		, _size(size)
@@ -34,9 +42,16 @@ public:
 		*this = std::move(other);
 	}
 
+	/**
+	 * Initializes table with items in list.
+	 */
 	TwoHashTable(const std::initializer_list<UPCEntry>& list)
 		: TwoHashTable(list, list.size()) {}
 
+	/**
+	 * Initializes table with items in list.
+	 * @param size Number of buckets
+	 */
 	TwoHashTable(const std::initializer_list<UPCEntry>& list, size_t size) : TwoHashTable(size) {
 		for (const auto& entry : list) {
 			if (!insert(entry)) {
@@ -45,14 +60,34 @@ public:
 		}
 	}
 
+	/**
+	 * Read entries in given CSV file to initialize table.
+	 * @param filename Path to database file
+	 * @param size Number of buckets
+	 */
     TwoHashTable(const std::string& filename, size_t size);
 
-    bool insert(UPCEntry item);     // returns true if successful, false otherwise.
+    /**
+     * Inserts item to table if it has a valid hash (table size > 0).
+     * @return true if item's hash was valid
+     */
+    bool insert(UPCEntry item);
 
+    /**
+     * @return Copies of all entries in table
+     */
     std::vector<UPCEntry> entries() const;
 
-    Position search(UPCEntry &item); // if not found, return the default position with both indices set as -1
+    /**
+     * Searches for given item.
+     * @return Position of item, which can indicate if item was not found
+     */
+    Position search(const UPCEntry &item) const;
 
+    /**
+     * @return Standard deviation of the set of all bucket sizes in this table if table size is
+     * greater than 0, or NaN otherwise.
+     */
     double getStdDev();
 
 	bool operator==(const TwoHashTable& rhs) const {
@@ -89,6 +124,10 @@ public:
 	}
 };
 
+/**
+ * @param tableSize Size of table that the entry will be inserted into
+ * @return Hash of given entry if tableSize > 0, otherwise none
+ */
 Option<Hash> getHash(const UPCEntry& entry, size_t tableSize);
 
 #endif //ASSIGNMENT_6__TWOHASHTABLE_H_

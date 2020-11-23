@@ -4,11 +4,24 @@
 #include <tuple>
 #include <ostream>
 
+/**
+ * Sequencial index of an item in the hash table.
+ */
 class Position {
 public:
-    int indexInTable = -1; //position in the table.
-    int indexInBin = -1;   // position in the linked list.
+	/**
+	 * Position in the table. -1 means not found.
+	 */
+    int indexInTable = -1;
 
+    /**
+     * Position in the linked list. -1 means not found.
+     */
+    int indexInBin = -1;
+
+    /**
+     * @return Position which indicates that an item was not found.
+     */
     static Position notFound() {
     	return {-1, -1};
     }

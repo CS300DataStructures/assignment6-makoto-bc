@@ -4,6 +4,10 @@
 #include <memory>
 #include <ostream>
 
+/**
+ * Linked list
+ * @tparam T type of item
+ */
 template<class T>
 class List {
 private:
@@ -21,6 +25,9 @@ public:
 	List()
 		: _size(0) {}
 
+	/**
+	 * Initializes list with items in given list.
+	 */
 	List(const std::initializer_list<T>& list) : List() {
 		_size = list.size();
 		if (_size == 0) {
@@ -65,6 +72,9 @@ public:
 		return _size;
 	}
 
+	/**
+	 * Inserts item to this list at index.
+	 */
 	void insert(size_t index, T item) {
 		if (index == 0) {
 			_head = std::make_unique<Node>(std::move(item), std::move(_head));
@@ -75,6 +85,9 @@ public:
 		++_size;
 	}
 
+	/**
+	 * Removes item at index.
+	 */
 	void remove(size_t index) {
 		if (index >= _size) {
 			throw std::out_of_range("index is out of range");
@@ -89,6 +102,9 @@ public:
 		--_size;
 	}
 
+	/**
+	 * @return Node at index
+	 */
 	const Node& nodeAt(size_t index) const {
 		if (index >= _size) {
 			throw std::out_of_range("index is out of range");
