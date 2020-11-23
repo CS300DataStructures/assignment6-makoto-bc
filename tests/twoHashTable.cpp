@@ -1,5 +1,14 @@
 #include <gtest/gtest.h>
+#include <unistd.h>
 #include "../twoHashTable.h"
+
+TEST(TwoHashTable, readFile) {
+	std::string filepath(__FILE__);
+	filepath = filepath.substr(0, filepath.find_last_of('/'));
+	chdir(filepath.c_str());
+	TwoHashTable result("../grocery_upc_database.csv", 10000);
+	EXPECT_EQ(result.entries().size(), 110433);
+}
 
 TEST(TwoHashTable, parse) {
 	struct Test {
@@ -58,6 +67,9 @@ TEST(TwoHashTable, parse) {
 			EXPECT_EQ(TwoHashTable::parse(ss, 2), tests[i].expected) << i;
 		}
 	}
+
+	std::stringstream ss("0,");
+	EXPECT_THROW(TwoHashTable::parse(ss, 0), std::runtime_error);
 }
 
 TEST(TwoHashTable, insert) {
