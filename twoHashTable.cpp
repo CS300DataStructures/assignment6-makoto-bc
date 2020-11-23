@@ -44,13 +44,29 @@ bool TwoHashTable::insert(UPCEntry item) {
 }
 
 Option<Hash> getHash(const UPCEntry& entry, size_t tableSize) {
-	if (entry.description.size() < 3 || tableSize == 0) {
+	if (tableSize == 0) {
 		return {};
+	}
+
+	std::array<char, 3> firstThreeChars{};
+	switch (entry.description.size()) {
+	case 1:
+		firstThreeChars = {entry.description[0], '\0', '\0'};
+		break;
+	case 2:
+		firstThreeChars = {entry.description[0], entry.description[1], '\0'};
+		break;
+	default:
+		firstThreeChars = {
+			entry.description[0],
+			entry.description[1],
+			entry.description[2],
+		};
 	}
 
 	return {{
 		entry.upc % tableSize,
-		(entry.description[0] + 27 * entry.description[1] + 729 * entry.description[2]) % tableSize,
+		(firstThreeChars[0] + 27 * firstThreeChars[1] + 729 * firstThreeChars[2]) % tableSize,
 	}};
 }
 

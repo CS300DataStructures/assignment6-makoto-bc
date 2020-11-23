@@ -21,13 +21,13 @@ TEST(TwoHashTable, parse) {
 		},
 		{
 			"0,",
-			true,
-			TwoHashTable(),
+			false,
+			TwoHashTable({{0, ""}}),
 		},
 		{
 			"0,a",
-			true,
-			TwoHashTable(),
+			false,
+			TwoHashTable({{0, "a"}}),
 		},
 		{
 			"0,aaa",
@@ -160,6 +160,21 @@ TEST(TwoHashTable, getHash) {
 			{0, "aaa"},
 			0,
 			{},
+		},
+		{
+			{0, ""},
+			10,
+			{{0, 0}},
+		},
+		{
+			{0, "a"},
+			10,
+			{{0, 7}},
+		},
+		{
+			{0, "aa"},
+			10,
+			{{0, 6}},
 		},
 		{
 			{1, "aaa"},
