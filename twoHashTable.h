@@ -65,30 +65,30 @@ public:
 	 * @param filename Path to database file
 	 * @param size Number of buckets
 	 */
-    TwoHashTable(const std::string& filename, size_t size);
+	TwoHashTable(const std::string& filename, size_t size);
 
-    /**
-     * Inserts item to table if it has a valid hash (table size > 0).
-     * @return true if item's hash was valid
-     */
-    bool insert(UPCEntry item);
+	/**
+	 * Inserts item to table if it has a valid hash (table size > 0).
+	 * @return true if item's hash was valid
+	 */
+	bool insert(UPCEntry item);
 
-    /**
-     * @return Copies of all entries in table
-     */
-    std::vector<UPCEntry> entries() const;
+	/**
+	 * @return Copies of all entries in table
+	 */
+	std::vector<UPCEntry> entries() const;
 
-    /**
-     * Searches for given item.
-     * @return Position of item, which can indicate if item was not found
-     */
-    Position search(const UPCEntry &item) const;
+	/**
+	 * Searches for given item.
+	 * @return Position of item, which can indicate if item was not found
+	 */
+	Position search(const UPCEntry& item) const;
 
-    /**
-     * @return Standard deviation of the set of all bucket sizes in this table if table size is
-     * greater than 0, or NaN otherwise.
-     */
-    double getStdDev();
+	/**
+	 * @return Standard deviation of the set of all bucket sizes in this table if table size is
+	 * greater than 0, or NaN otherwise.
+	 */
+	double getStdDev();
 
 	bool operator==(const TwoHashTable& rhs) const {
 		auto cmp = [](const UPCEntry& a, const UPCEntry& b) {

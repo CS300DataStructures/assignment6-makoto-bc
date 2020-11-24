@@ -4,7 +4,6 @@
 // Hash table for UPC and description
 
 #include "twoHashTable.h"
-#include "UPCEntry.h"
 #include <iostream>
 #include <cassert>
 using namespace std;

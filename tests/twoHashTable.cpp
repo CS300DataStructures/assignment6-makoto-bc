@@ -1,5 +1,4 @@
 #include <gtest/gtest.h>
-#include <unistd.h>
 #include "../twoHashTable.h"
 
 TEST(TwoHashTable, readFile) {

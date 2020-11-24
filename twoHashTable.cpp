@@ -1,10 +1,9 @@
 #include "twoHashTable.h"
-#include <algorithm>
 #include <fstream>
 
 TwoHashTable TwoHashTable::parse(std::istream& file, size_t size) {
 	TwoHashTable result(size);
-	while(true) {
+	while (true) {
 		file.peek();
 		if (file.eof()) {
 			return result;

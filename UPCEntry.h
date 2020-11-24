@@ -9,19 +9,18 @@
 /**
  * An entry in TwoHashTable which contains UPC and description.
  */
-class UPCEntry
-{
+class UPCEntry {
 public:
-    unsigned long long upc;
-    std::string description;
+	unsigned long long upc;
+	std::string description;
 
 	UPCEntry()
 		: upc(0)
 	{}
 
-    UPCEntry(unsigned long long upc, std::string name)
-    	: upc(upc)
-    	, description(std::move(name)) {}
+	UPCEntry(unsigned long long upc, std::string name)
+		: upc(upc)
+		, description(std::move(name)) {}
 
 	/**
 	 * Parses row.
