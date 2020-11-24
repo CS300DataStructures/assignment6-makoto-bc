@@ -49,6 +49,8 @@ Option<Hash> getHash(const UPCEntry& entry, size_t tableSize) {
 
 	std::array<char, 3> firstThreeChars{};
 	switch (entry.description.size()) {
+	case 0:
+		break;
 	case 1:
 		firstThreeChars = {entry.description[0], '\0', '\0'};
 		break;

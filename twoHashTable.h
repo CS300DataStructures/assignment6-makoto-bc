@@ -11,6 +11,9 @@
 #include <ostream>
 #include <algorithm>
 
+/**
+ * Hash table of UPCEntries with UPC as key.
+ */
 class TwoHashTable {
 public:
 	/**
